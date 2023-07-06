@@ -1,21 +1,8 @@
-const { Sequelize, Op, DataTypes } = require('sequelize');
-require('dotenv').config();
-const {
-   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, PORT_DB
-} = process.env; 
+import {Sequelize} from 'sequelize-typescript'
 
+export const sequelize = new Sequelize("stock","postgres","Rama1291",{
+    host:"localhost",
+    dialect:"postgres",
+    models: [__dirname + "/models"]
 
-
-const db = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT_DB}/${DB_NAME}`,
-    {
-       logging: false,
-    }
- );
-
-
- module.exports = {
-    ...db.models,
-    conn: db,
- };
- 
+})

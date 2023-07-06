@@ -1,12 +1,20 @@
 const express = require("express");
 const {PORT} = process.env;
 const app = express()
-const { conn } = require('./db.js');
+import { sequelize } from "./db";
 
 app.use(express.json())
-conn.sync({ force: true }).then(() => {
 
-app.listen(3001, () =>{
-    console.log("server running on port 3001")
-})
+app.listen(3001, async () =>{
+    console.log(`server running on port ${PORT}`);
+    try {
+        await sequelize.authenticate();
+        console.log("Connected to the database");
+    
+        // Crea la base de datos si no existe
+        await sequelize.sync({ force: false });
+        console.log("Database synchronized");
+      } catch (error) {
+        console.error("Error connecting to the database", error);
+      }
 })
