@@ -6,9 +6,11 @@ import {
   PrimaryKey,
   BelongsTo,
   ForeignKey,
+  HasMany,
 } from "sequelize-typescript";
 import { Deposito } from "./deposito";
 import { Productos } from "./productos";
+import { MovimientoLotes } from "./movimientoLote";
 
 @Table({ tableName: "lotes", timestamps: false })
 export class Lotes extends Model {
@@ -36,6 +38,11 @@ export class Lotes extends Model {
     type: DataType.DATE,
   })
   fechaVencimiento!: string;
+  @Column({
+    field: "cantidad",
+    type: DataType.INTEGER,
+  })
+  cantidad!: number;
 
   @ForeignKey(() => Productos)
   @Column({
@@ -45,6 +52,9 @@ export class Lotes extends Model {
   codProducto!: number;
   @BelongsTo(() => Productos)
   producto!: Productos;
+
+  @HasMany(() => MovimientoLotes)
+  moviniemtoLotes!: MovimientoLotes[];
 }
 
 export default Lotes;
