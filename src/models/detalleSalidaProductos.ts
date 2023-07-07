@@ -24,9 +24,9 @@ export class DetalleSalidaProducto extends Model {
   @ForeignKey(() => Productos)
   @Column({
     field: "cod_producto",
-    type: DataType.INTEGER,
+    type: DataType.STRING,
   })
-  codProducto!: number;
+  codProducto!: string;
   @BelongsTo(() => Productos)
   productos!: Productos;
 

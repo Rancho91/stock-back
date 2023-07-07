@@ -28,7 +28,7 @@ export class Productos extends Model {
   @HasMany(() => DetalleSalidaProducto)
   salidasProductos?: DetalleSalidaProducto[];
   @HasMany(() => Codigos)
-  codigos!: Codigos[];
+  codigos?: Codigos[];
 }
 
 export default Productos;
