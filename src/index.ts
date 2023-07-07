@@ -1,9 +1,6 @@
-const express = require("express");
-const {PORT} = process.env;
-const app = express()
+import app from "./app";
 import { sequelize } from "./db";
-
-app.use(express.json())
+const {PORT} = process.env;
 
 app.listen(3001, async () =>{
     console.log(`server running on port ${PORT}`);

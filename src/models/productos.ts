@@ -13,7 +13,7 @@ import { Codigos } from "./codigos";
 export class Productos extends Model {
   @PrimaryKey
   @Column({
-    field: "producto_code",
+    field: "codigoInterno",
     type: DataType.STRING,
   })
   codigo!: string;
@@ -29,6 +29,7 @@ export class Productos extends Model {
   salidasProductos?: DetalleSalidaProducto[];
   @HasMany(() => Codigos)
   codigos?: Codigos[];
+  
 }
 
 export default Productos;

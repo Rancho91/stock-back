@@ -14,14 +14,14 @@ import {Productos} from "./productos";
 export class Codigos extends Model {
   @PrimaryKey
   @Column({
-    field: "codigo_externo",
+    field: "codigoExterno",
     type: DataType.STRING,
   })
   Codigo!: string;
 
   @ForeignKey(() => Productos)
   @Column({
-    field: "cod_producto",
+    field: "codigoInterno",
     type: DataType.STRING,
   })
   codProducto!: string;

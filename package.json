@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "lint": "ts-standard",
     "start": "nodemon build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
@@ -23,8 +25,19 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "github:types/express",
+    "@types/morgan": "^1.9.4",
     "@types/node": "^20.4.0",
-    "@types/validator": "^13.7.17"
+    "@types/validator": "^13.7.17",
+    "ts-standard": "^12.0.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project":"tsconfig.json"
+    },
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ]
   }
 }
