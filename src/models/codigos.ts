@@ -3,29 +3,30 @@ import {
   Column,
   Table,
   DataType,
-  PrimaryKey,
   BelongsTo,
   ForeignKey,
 } from "sequelize-typescript";
 
+
 import {Productos} from "./productos";
 
-@Table({ tableName: "CodigosExternos", timestamps: false })
-export class Codigos extends Model {
-  @PrimaryKey
+@Table({ tableName: "codigos", timestamps: false })
+export class Codigos extends Model<Codigos> {
+
   @Column({
     field: "codigoExterno",
     type: DataType.STRING,
   })
-  Codigo!: string;
+  codigoExterno!: string;
 
   @ForeignKey(() => Productos)
   @Column({
     field: "codigoInterno",
     type: DataType.STRING,
   })
-  codProducto!: string;
-  @BelongsTo(() => Productos)
+  codigoInterno!: string;
+  
+  @BelongsTo(() => Productos, { foreignKey: "codigoInterno" })
   productos?: Productos;
 }
 

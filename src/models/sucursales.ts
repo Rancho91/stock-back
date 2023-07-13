@@ -10,7 +10,7 @@ import { SalidasProductos } from "./salidasProductos";
 import { DetalleMovimiento } from "./detalleMovimiento";
 
 @Table({ tableName: "sucursales", timestamps: false })
-export class Sucursales extends Model {
+export class Sucursales extends Model{
   @PrimaryKey
   @Column({
     field: "id",

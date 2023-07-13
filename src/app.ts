@@ -1,16 +1,15 @@
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
-import Router  from"./routes/router";
+import  express  from "express";
+import  cors from "cors";
+
 require("dotenv").config();
+import {router} from "./routes"
 const app = express(); 
+ app.use(cors());
 
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+ app.use(express.json());
 
 
-app.use("/", Router);
+ app.use("/", router);
 
 
 export default  app;

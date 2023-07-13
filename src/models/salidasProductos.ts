@@ -17,7 +17,7 @@ enum TipoSalidaEnum {
   Otros = "Otros",
 }
 @Table({ tableName: "salidas_productos", timestamps: false })
-export class SalidasProductos extends Model {
+export class SalidasProductos extends Model<SalidasProductos> {
   @PrimaryKey
   @Column({
     field: "id",

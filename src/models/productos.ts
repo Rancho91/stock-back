@@ -8,28 +8,30 @@ import {
 } from "sequelize-typescript";
 import { Lotes } from "./lotes";
 import { DetalleSalidaProducto } from "./detalleSalidaProductos";
-import { Codigos } from "./codigos";
-@Table({ tableName: "lotes", timestamps: false })
-export class Productos extends Model {
+import  {Codigos}  from "./codigos";
+@Table({ tableName: "productos", timestamps: false })
+export class Productos extends Model<Productos> {
   @PrimaryKey
   @Column({
     field: "codigoInterno",
     type: DataType.STRING,
   })
-  codigo!: string;
+  codigoInterno!: string;
+
   @Column({
-    field: "producto_description",
+    field: "description",
     type: DataType.STRING,
   })
   description!: string;
 
   @HasMany(() => Lotes)
   lotes?: Lotes[];
+
   @HasMany(() => DetalleSalidaProducto)
   salidasProductos?: DetalleSalidaProducto[];
-  @HasMany(() => Codigos)
+
+  @HasMany(() => Codigos, { foreignKey: "codigoInterno" })
   codigos?: Codigos[];
-  
 }
 
 export default Productos;

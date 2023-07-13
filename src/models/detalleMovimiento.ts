@@ -12,7 +12,7 @@ import { MovimientoLotes } from "./movimientoLote";
 import { Sucursales } from "./sucursales";
 
 @Table({ tableName: "detalleMovimiento", timestamps: false })
-export class DetalleMovimiento extends Model {
+export class DetalleMovimiento extends Model<DetalleMovimiento> {
   @PrimaryKey
   @Column({
     field: "id",
@@ -28,7 +28,7 @@ export class DetalleMovimiento extends Model {
 
   @ForeignKey(() => Sucursales)
   @Column({
-    field: "id_sucursal",
+    field: "idSucursal",
     type: DataType.INTEGER,
   })
   idSucursal!: number;
@@ -37,10 +37,10 @@ export class DetalleMovimiento extends Model {
 
   @ForeignKey(() => MovimientoLotes)
   @Column({
-    field: "id_movimiento",
+    field: "idMovimiento",
     type: DataType.INTEGER,
   })
-  MovimientoLotes!: number;
+  idMovimiento!: number;
   @BelongsTo(() => MovimientoLotes)
   movimientoLotes!: MovimientoLotes;
 }

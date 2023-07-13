@@ -19,7 +19,7 @@ enum TipoSalidaEnum {
 }
 
 @Table({ tableName: "movimoientos", timestamps: false })
-export class MovimientoLotes extends Model {
+export class MovimientoLotes extends Model<MovimientoLotes> {
   @PrimaryKey
   @Column({
     field: "id",

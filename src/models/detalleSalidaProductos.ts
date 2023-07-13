@@ -12,7 +12,7 @@ import { Productos } from "./productos";
 import { SalidasProductos } from "./salidasProductos";
 
 @Table({ tableName: "detalleSaliodaProducto", timestamps: false })
-export class DetalleSalidaProducto extends Model {
+export class DetalleSalidaProducto extends Model<DetalleSalidaProducto> {
   @PrimaryKey
   @Column({
     field: "id",
@@ -23,7 +23,7 @@ export class DetalleSalidaProducto extends Model {
 
   @ForeignKey(() => Productos)
   @Column({
-    field: "cod_producto",
+    field: "codProducto",
     type: DataType.STRING,
   })
   codProducto!: string;
@@ -41,7 +41,7 @@ export class DetalleSalidaProducto extends Model {
     field: "idSalidaProducto",
     type: DataType.INTEGER,
   })
-  salidaProducto!: number;
+  idSalidaProducto!: number;
   @BelongsTo(() => SalidasProductos)
   salidasProductos!: SalidasProductos;
 }

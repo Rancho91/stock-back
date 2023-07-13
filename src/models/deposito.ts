@@ -12,21 +12,22 @@ import { Lotes } from "./lotes";
   tableName: "depositos",
   timestamps: false,
 })
-export class Deposito extends Model {
+export class Deposito extends Model<Deposito> {
   @PrimaryKey
   @Column({
     field: "id",
     type: DataType.INTEGER,
-    allowNull: false, // La columna name no puede contener valores nulos
+    allowNull: false,
+    autoIncrement:true
   })
-  name!: number;
+  id!: number;
 
   @Column({
     field: "description",
     type: DataType.STRING,
     allowNull: true, // La columna price puede contener valores nulos
   })
-  price?: string;
+  description?: string;
 
   @HasMany(() => Lotes)
   lotes?: Lotes[];
