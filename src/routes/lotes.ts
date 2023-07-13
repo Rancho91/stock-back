@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { LotesControllers } from "../controller/lotes/insertLotes";
+import { LotesControllers } from "../controller/lotes/LotesController";
  const router = Router()
 const  controller = new LotesControllers
  router.post('/',async(_req: Request, res : Response)=>{

@@ -18,7 +18,7 @@ enum TipoSalidaEnum {
   Otros = "Otros",
 }
 
-@Table({ tableName: "movimoientos", timestamps: false })
+@Table({ tableName: "movimientos", timestamps: false })
 export class MovimientoLotes extends Model<MovimientoLotes> {
   @PrimaryKey
   @Column({
@@ -26,33 +26,33 @@ export class MovimientoLotes extends Model<MovimientoLotes> {
     type: DataType.INTEGER,
     autoIncrement: true,
   })
-  tipoMovId!: number;
+  id!: number;
 
   @ForeignKey(() => Lotes)
   @Column({
-    field: "id_lote",
+    field: "idLote",
     type: DataType.INTEGER,
     allowNull: true,
   })
-  idDeposito!: number;
+  idLote!: number;
   @BelongsTo(() => Lotes)
   deposito!: Lotes;
 
   @Column({
-    field: "entrada_salida",
+    field: "entradaSalida",
     type: DataType.BOOLEAN,
   })
   entradaSalida!: boolean;
 
   // Relación con la tabla Sucursales
   @Column({
-    field: "fecha_movimiento",
+    field: "fechaMovimiento",
     type: DataType.DATE,
   })
   fechaMovimiento!: Date;
 
   @Column({
-    field: "tipo_salida",
+    field: "tipoSalida",
     type: DataType.ENUM(...Object.values(TipoSalidaEnum)),
   })
   tipoSalida!: TipoSalidaEnum;

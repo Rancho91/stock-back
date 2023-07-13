@@ -1,5 +1,5 @@
  import { Router, Response, Request } from "express";
- import { DepositoControllers } from "../controller/insertSucursales/insertDepositos";
+ import { DepositoControllers } from "../controller/Sucursales/DepositosController";
  const router = Router()
 
 const controller = new DepositoControllers

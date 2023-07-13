@@ -18,7 +18,7 @@ export class Deposito extends Model<Deposito> {
     field: "id",
     type: DataType.INTEGER,
     allowNull: false,
-    autoIncrement:true
+    autoIncrement: true,
   })
   id!: number;
 
