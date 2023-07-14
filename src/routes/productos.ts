@@ -14,6 +14,23 @@ router.post('/',async (_req: Request, res : Response)=>{
     }
 } )
 
+router.post('/addCode',async (_req: Request, res : Response)=>{
+    try {
+        const {codigoInterno, codigosExternos} = _req.body 
+       await controller.createCodigos({codigoInterno,codigosExternos})
+       res.status(200).json("se creo el producto")
+    } catch (error) {
+        res.status(400).json(error)
+    }
+} )
+
+router.get('/', async(_req: Request, res: Response)=>{
+    try {
+        res.status(200).json(await controller.findAllProduct())
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
 
 
  export {router}

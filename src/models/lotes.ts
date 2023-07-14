@@ -9,11 +9,11 @@ import {
   HasMany,
 } from "sequelize-typescript";
 import { Deposito } from "./deposito";
-import  Productos  from "./productos";
+import Productos from "./productos";
 import { MovimientoLotes } from "./movimientoLote";
 
 @Table({ tableName: "lotes", timestamps: false })
-export class Lotes extends Model <Lotes> {
+export class Lotes extends Model<Lotes> {
   @PrimaryKey
   @Column({
     field: "id",
@@ -38,7 +38,7 @@ export class Lotes extends Model <Lotes> {
     type: DataType.DATE,
   })
   fechaIngreso!: string;
-  
+
   @Column({
     field: "fechaVencimiento",
     type: DataType.DATE,
@@ -49,6 +49,11 @@ export class Lotes extends Model <Lotes> {
     type: DataType.INTEGER,
   })
   cantidad!: number;
+  @Column({
+    field: "stock",
+    type: DataType.INTEGER,
+  })
+  stock!: number;
 
   @ForeignKey(() => Productos)
   @Column({

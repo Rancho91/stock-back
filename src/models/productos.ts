@@ -8,7 +8,7 @@ import {
 } from "sequelize-typescript";
 import { Lotes } from "./lotes";
 import { DetalleSalidaProducto } from "./detalleSalidaProductos";
-import  {Codigos}  from "./codigos";
+import { Codigos } from "./codigos";
 @Table({ tableName: "productos", timestamps: false })
 export class Productos extends Model<Productos> {
   @PrimaryKey

@@ -1,5 +1,4 @@
 import { sequelize } from "../../db";
-
 export class LotesControllers {
   public async createLote({
     idDeposito,
@@ -18,7 +17,8 @@ export class LotesControllers {
         fechaIngreso,
         fechaVencimiento,
         cantidad,
-        codProducto
+        codProducto,
+        stock:cantidad
     });
   }
  

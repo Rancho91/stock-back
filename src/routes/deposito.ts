@@ -12,4 +12,5 @@ router.post('/', async(_req: Request, res : Response)=>{
         res.status(400).json(error)
     }
 } )
+
  export {router}

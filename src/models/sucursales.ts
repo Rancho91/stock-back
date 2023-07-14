@@ -8,9 +8,9 @@ import {
 } from "sequelize-typescript";
 import { SalidasProductos } from "./salidasProductos";
 import { DetalleMovimiento } from "./detalleMovimiento";
-
+import {StockSucursal} from "./stockSucursal";
 @Table({ tableName: "sucursales", timestamps: false })
-export class Sucursales extends Model{
+export class Sucursales extends Model<Sucursales> {
   @PrimaryKey
   @Column({
     field: "id",
@@ -45,6 +45,8 @@ export class Sucursales extends Model{
 
   @HasMany(() => SalidasProductos)
   salidasProductos?: SalidasProductos[];
+  @HasMany(()=> StockSucursal)
+  StockSucursal? : StockSucursal[]
 }
 
 export default Sucursales;

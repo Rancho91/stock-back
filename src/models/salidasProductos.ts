@@ -40,13 +40,13 @@ export class SalidasProductos extends Model<SalidasProductos> {
 
   @ForeignKey(() => Sucursales)
   @Column({
-    field: "id_sucursal",
+    field: "idSucursal",
     type: DataType.INTEGER,
   })
-  codSucursal!: number;
+  idSucursal!: number;
 
   @BelongsTo(() => Sucursales)
-  producto!: Sucursales;
+  sucursales!: Sucursales;
 
   @HasMany(() => DetalleSalidaProducto)
   detalleSalidaProducto!: DetalleSalidaProducto[];

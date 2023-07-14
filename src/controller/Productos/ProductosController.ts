@@ -25,4 +25,15 @@ export class ProductosControllers {
       await sequelize.models.Codigos.create({ codigoExterno, codigoInterno });
     });
   }
+
+  public async findAllProduct() {
+    return sequelize.models.Productos.findAll({
+      include: [
+        {
+          model: sequelize.models.Codigos,
+          as: "codigos", // Nombre de la relación en el modelo Productos
+        },
+      ],
+    });
+  }
 }
