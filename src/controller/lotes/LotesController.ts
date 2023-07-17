@@ -27,7 +27,7 @@ export class LotesControllers {
     return await sequelize.models.Lotes.findAll();
   }
 
-  public async updateLotes(lotes: Object, id: number) {
+  public async updateLotes({ lotes, id }: { lotes: Object; id: number }) {
     return await sequelize.models.Lotes.update(
       {
         lotes,

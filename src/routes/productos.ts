@@ -40,11 +40,13 @@ router.delete("/:id", async (_req: Request, res: Response) => {
   }
 });
 router.put("/:id", async (_req: Request, res: Response) => {
-    const {product, codigosExternos} = _req.body
+  const { product, codigosExternos } = _req.body;
   try {
-    await controller.updateCodigoExterno(codigosExternos)
-    await controller.updateProducto(product)
-    res.status(200).json({message: "se modifico el producto de forma correcta"});
+    await controller.updateCodigoExterno(codigosExternos);
+    await controller.updateProducto(product);
+    res
+      .status(200)
+      .json({ message: "se modifico el producto de forma correcta" });
   } catch (error) {
     res.status(400).json(error);
   }

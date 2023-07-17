@@ -6,15 +6,14 @@ export class StockSucursalesController {
     idSucursal,
     codProducto,
   }: {
-    cantidad:number,
-    idSucursal: number,
-    codProducto: string,
+    cantidad: number;
+    idSucursal: number;
+    codProducto: string;
   }) {
     return await sequelize.models.StockSucursal.create({
-        cantidad,
-        idSucursal,
-        codProducto,
+      cantidad,
+      idSucursal,
+      codProducto,
     });
   }
-  
 }

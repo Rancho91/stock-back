@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
 import { SucursalesController } from "../controller/Sucursales/SucursalController";
 import { StockSucursalesController } from "../controller/Sucursales/stockSucursalController";
-const controller = new SucursalesController;
-const controllerStock = new StockSucursalesController
+const controller = new SucursalesController();
+const controllerStock = new StockSucursalesController();
 const router = Router();
 router.post("/", async (_req: Request, res: Response) => {
   try {
@@ -21,27 +21,25 @@ router.post("/stock", async (_req: Request, res: Response) => {
   }
 });
 
-router.get("/", async(_req: Request, res: Response) => {
+router.get("/", async (_req: Request, res: Response) => {
   try {
-    res.status(200).json(controller.findAllSucursales())
-  } catch (error) {
-    
-  }
-})
+    res.status(200).json(controller.findAllSucursales());
+  } catch (error) {}
+});
 
-router.delete("/:id", async(_req:Request, res:Response)=>{
+router.delete("/:id", async (_req: Request, res: Response) => {
   try {
-    res.status(200).json(controller.deleteSucursal(Number(_req.params)))
+    res.status(200).json(controller.deleteSucursal(Number(_req.params)));
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
-})
-router.put("/", async(_req:Request, res:Response)=>{
+});
+router.put("/", async (_req: Request, res: Response) => {
   try {
-    res.status(200).json(controller.updateSucursalD(_req.body))
+    res.status(200).json(controller.updateSucursalD(_req.body));
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
-})
+});
 
 export { router };

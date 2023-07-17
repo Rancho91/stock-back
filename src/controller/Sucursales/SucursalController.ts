@@ -17,10 +17,16 @@ export class SucursalesController {
     });
   }
 
-  public async findAllSucursales(){
-    return await sequelize.models.Sucursales.findAll()
+  public async findAllSucursales() {
+    return await sequelize.models.Sucursales.findAll();
   }
-  public async updateSucursalD({deposito, id}:{deposito:object, id:number}) {
+  public async updateSucursalD({
+    deposito,
+    id,
+  }: {
+    deposito: object;
+    id: number;
+  }) {
     return await sequelize.models.Deposito.update(
       {
         deposito,
@@ -32,15 +38,16 @@ export class SucursalesController {
       }
     );
   }
-  public async deleteSucursal( id: number) {
+  public async deleteSucursal(id: number) {
     return await sequelize.models.Deposito.update(
       {
-        delete:true,
+        delete: true,
       },
       {
         where: {
           id: id,
         },
       }
-    )}
+    );
+  }
 }

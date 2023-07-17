@@ -6,7 +6,13 @@ export class DepositoControllers {
       description,
     });
   }
-  public async updateDeposito(deposito: object, id: number) {
+  public async updateDeposito({
+    deposito,
+    id,
+  }: {
+    deposito: object;
+    id: number;
+  }) {
     return await sequelize.models.Deposito.update(
       {
         deposito,
@@ -18,10 +24,10 @@ export class DepositoControllers {
       }
     );
   }
-  public async deleteDeposito( id: number) {
+  public async deleteDeposito(id: number) {
     return await sequelize.models.Deposito.update(
       {
-        delete:true,
+        delete: true,
       },
       {
         where: {

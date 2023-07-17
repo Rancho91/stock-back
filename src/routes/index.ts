@@ -18,10 +18,11 @@ const archivos = readdirSync(PATH_ROUTER).filter((fileName) => {
 console.log(archivos);
 archivos.filter(async (fileName) => {
   const cleanName = cleanFileName(fileName);
-  if (cleanName !== "index" ) {
-    if(cleanName !==  "router"){
-    const moduleRouter = await import(`./${cleanName}`);
-    router.use(`/${cleanName}`, moduleRouter.router);}
+  if (cleanName !== "index") {
+    if (cleanName !== "router") {
+      const moduleRouter = await import(`./${cleanName}`);
+      router.use(`/${cleanName}`, moduleRouter.router);
+    }
   }
 });
 
