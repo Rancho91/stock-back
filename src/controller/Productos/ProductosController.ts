@@ -36,4 +36,53 @@ export class ProductosControllers {
       ],
     });
   }
+
+  public async updateProducto({
+    product,
+    id,
+  }: {
+    product: object;
+    id: string;
+  }) {
+    return await sequelize.models.Productos.update(
+      {
+        product,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+  }
+  public async updateCodigoExterno({
+    codigo,
+    id,
+  }: {
+    codigo: object;
+    id: number;
+  }) {
+    return await sequelize.models.Codigos.update(
+      {
+        codigo,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+  }
+  public async deleteProducto(id: number) {
+    return await sequelize.models.Codigos.update(
+      {
+        delete: true,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+  }
 }

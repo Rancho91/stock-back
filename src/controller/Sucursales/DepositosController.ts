@@ -6,4 +6,28 @@ export class DepositoControllers {
       description,
     });
   }
+  public async updateDeposito(deposito: object, id: number) {
+    return await sequelize.models.Deposito.update(
+      {
+        deposito,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+  }
+  public async deleteDeposito( id: number) {
+    return await sequelize.models.Deposito.update(
+      {
+        delete:true,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+  }
 }

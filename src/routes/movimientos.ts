@@ -4,12 +4,18 @@ const router = Router();
 const controller = new MovimientosController();
 router.post("/", async (_req: Request, res: Response) => {
   try {
-    console.log(_req.body)
+    console.log(_req.body);
     await controller.createMovimientoLote(_req.body);
     res.status(200).json("se creo el producto");
   } catch (error) {
     res.status(400).json(error);
   }
 });
-
-export {router}
+router.put("/", async (_req: Request, res: Response) => {
+  try {
+    res.status(200).json(await controller.updateMovimientoLote(_req.body));
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+export { router };

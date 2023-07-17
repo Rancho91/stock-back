@@ -21,4 +21,27 @@ router.post("/stock", async (_req: Request, res: Response) => {
   }
 });
 
+router.get("/", async(_req: Request, res: Response) => {
+  try {
+    res.status(200).json(controller.findAllSucursales())
+  } catch (error) {
+    
+  }
+})
+
+router.delete("/:id", async(_req:Request, res:Response)=>{
+  try {
+    res.status(200).json(controller.deleteSucursal(Number(_req.params)))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+router.put("/", async(_req:Request, res:Response)=>{
+  try {
+    res.status(200).json(controller.updateSucursalD(_req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
 export { router };

@@ -64,6 +64,12 @@ export class Lotes extends Model<Lotes> {
   @BelongsTo(() => Productos)
   producto!: Productos;
 
+
+  @Column({
+    field: "delete",
+    type: DataType.BOOLEAN,
+  })
+  delete!: boolean;
   @HasMany(() => MovimientoLotes)
   moviniemtoLotes!: MovimientoLotes[];
 }

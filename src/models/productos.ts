@@ -24,6 +24,14 @@ export class Productos extends Model<Productos> {
   })
   description!: string;
 
+  @Column({
+    field: "delete",
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  delete!: boolean;
+  
+
   @HasMany(() => Lotes)
   lotes?: Lotes[];
 

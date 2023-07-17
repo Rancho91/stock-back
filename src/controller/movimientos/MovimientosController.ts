@@ -7,14 +7,12 @@ export class MovimientosController {
     fechaMovimiento,
     detalle,
     tipoSalida,
-
   }: {
     idLote: number;
     entradaSalida: boolean;
     fechaMovimiento: string;
     detalle: [];
     tipoSalida: string;
-
   }) {
     detalle.map(async (det) => {
       const { cantidad, idSucursal, idMovimiento } = det;
@@ -30,5 +28,38 @@ export class MovimientosController {
       fechaMovimiento,
       tipoSalida,
     });
+  }
+  public async updateMovimientoLote({
+    movimiento,
+    detalle,
+    id,
+  }: {
+    movimiento: Object;
+    detalle: [];
+    id: number;
+  }) {
+    detalle?.map(async (det) => {
+      const { id } = det;
+      await sequelize.models.DetalleMovimiento.update(
+        {
+          det,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+    });
+    return await sequelize.models.MovimientoLotes.update(
+      {
+        movimiento,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
   }
 }

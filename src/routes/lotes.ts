@@ -12,4 +12,12 @@ const  controller = new LotesControllers
     }
 } )
 
+router.get('/', async(_req: Request, res : Response)=>{
+    try {
+       res.status(200).json(await controller.findAllLotes()) 
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
  export {router}

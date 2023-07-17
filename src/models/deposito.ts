@@ -28,7 +28,13 @@ export class Deposito extends Model<Deposito> {
     allowNull: true, // La columna price puede contener valores nulos
   })
   description?: string;
-
+  @Column({
+    field: "delete",
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  delete!: boolean;
+  
   @HasMany(() => Lotes)
   lotes?: Lotes[];
 }

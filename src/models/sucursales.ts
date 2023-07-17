@@ -39,6 +39,13 @@ export class Sucursales extends Model<Sucursales> {
     type: DataType.STRING,
   })
   descripcion!: string;
+  @Column({
+    field: "delete",
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  delete!: boolean;
+  
 
   @HasMany(() => DetalleMovimiento)
   detalleMovimiento?: DetalleMovimiento[];
