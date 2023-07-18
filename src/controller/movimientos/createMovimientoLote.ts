@@ -1,8 +1,7 @@
 import { sequelize } from "../../db";
 // import { LotesControllers } from "../lotes/LotesController";
 import { Lotes } from "../../utils/lotes";
-export class MovimientosController {
-  public async  createMovimientoLote({
+export async function createMovimientoLote({
     idLote,
     entradaSalida,
     fechaMovimiento,
@@ -66,56 +65,3 @@ export class MovimientosController {
       throw new Error("no se creo el movimiento");
     }
   }
-
-  public async updateMovimientoLote({
-    movimiento,
-    detalle,
-    id,
-  }: {
-    movimiento: Object;
-    detalle: [];
-    id: number;
-  }) {
-    detalle?.map(async (det) => {
-      const { id } = det;
-      await sequelize.models.DetalleMovimiento.update(
-        {
-          det,
-        },
-        {
-          where: {
-            id,
-          },
-        }
-      );
-    });
-    return await sequelize.models.MovimientoLotes.update(
-      {
-        movimiento,
-      },
-      {
-        where: {
-          id,
-        },
-      }
-    );
-  }
-
-  public async findLastId() {
-    interface id {
-      id: number;
-    }
-    const result = await sequelize.models.movimiento.findOne({
-      attributes: [[sequelize.fn("max", sequelize.col("id")), "id"]],
-    });
-    let resultId: id | null;
-    if (result) {
-      resultId = result.dataValues as id;
-    } else {
-      resultId = null;
-    }
-    let cantidad: number | null;
-    resultId ? (cantidad = resultId.id) : (cantidad = null);
-    return cantidad;
-  }
-}

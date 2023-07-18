@@ -51,4 +51,13 @@ export class LotesControllers {
       }
     );
   }
+  public async findOneLote (id:number){
+    try {
+      const response  = await sequelize.models.Lotes.findOne({where:{id}})
+      return response
+
+    } catch (error) {
+      return error
+    }
+  }
 }
