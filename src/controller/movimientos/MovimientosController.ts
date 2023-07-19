@@ -2,7 +2,7 @@ import { sequelize } from "../../db";
 // import { LotesControllers } from "../lotes/LotesController";
 import { Lotes } from "../../utils/lotes";
 export class MovimientosController {
-  public async  createMovimientoLote({
+  public async createMovimientoLote({
     idLote,
     entradaSalida,
     fechaMovimiento,
@@ -38,8 +38,6 @@ export class MovimientosController {
         },
         { transaction: t }
       );
-      console.log(response);
-
       detalle.map(async (det) => {
         const { cantidad, idSucursal } = det;
         await sequelize.models.DetalleMovimiento.create(
