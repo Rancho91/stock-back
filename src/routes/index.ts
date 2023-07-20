@@ -15,7 +15,6 @@ const archivos = readdirSync(PATH_ROUTER).filter((fileName) => {
   const stats = statSync(filePath);
   return stats.isFile() && fileName !== "index.js";
 });
-console.log(archivos);
 archivos.filter(async (fileName) => {
   const cleanName = cleanFileName(fileName);
   if (cleanName !== "index") {
