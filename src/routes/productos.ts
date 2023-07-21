@@ -3,6 +3,8 @@ import { ProductosControllers } from "../controller/Productos/ProductosControlle
 
 const router = Router();
 const controller = new ProductosControllers();
+import { tokenValidation } from "../utils/verifyToken";
+router.use(tokenValidation)
 router.post("/", async (_req: Request, res: Response) => {
   try {
     const { codigoInterno, description, codigosExternos } = _req.body;

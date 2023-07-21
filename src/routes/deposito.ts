@@ -3,7 +3,8 @@ import { DepositoControllers } from "../controller/Sucursales/DepositosControlle
 const router = Router();
 
 const controller = new DepositoControllers();
-
+import { tokenValidation } from "../utils/verifyToken";
+router.use(tokenValidation)
 router.post("/", async (_req: Request, res: Response) => {
   try {
     await controller.createDeposito(_req.body);

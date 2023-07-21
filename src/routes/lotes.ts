@@ -2,6 +2,8 @@ import { Router, Request, Response } from "express";
 import { LotesControllers } from "../controller/lotes/LotesController";
 const router = Router();
 const controller = new LotesControllers();
+import { tokenValidation } from "../utils/verifyToken";
+router.use(tokenValidation)
 router.post("/", async (_req: Request, res: Response) => {
   try {
     await controller.createLote(_req.body);

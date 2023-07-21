@@ -2,6 +2,8 @@ import { Router, Request, Response } from "express";
 import { MovimientosController } from "../controller/movimientos/MovimientosController";
 const router = Router();
 const controller = new MovimientosController();
+import { tokenValidation } from "../utils/verifyToken";
+router.use(tokenValidation)
 router.post("/", async (_req: Request, res: Response) => {
   try {
     console.log(_req.body);

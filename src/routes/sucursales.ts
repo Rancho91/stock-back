@@ -4,6 +4,8 @@ import { StockSucursalesController } from "../controller/Sucursales/stockSucursa
 const controller = new SucursalesController();
 const controllerStock = new StockSucursalesController();
 const router = Router();
+import { tokenValidation } from "../utils/verifyToken";
+router.use(tokenValidation)
 router.post("/", async (_req: Request, res: Response) => {
   try {
     await controller.createSucursal(_req.body);
