@@ -37,7 +37,6 @@ export async function createMovimientoLote({
         },
         { transaction: t }
       );
-      console.log(response);
 
       detalle.map(async (det) => {
         const { cantidad, idSucursal } = det;
@@ -50,15 +49,13 @@ export async function createMovimientoLote({
           { transaction: t }
         );
         cantidadLote = cantidadLote - cantidad;
-
-        await t.commit();
         await sequelize.models.Lotes.update(
-          {
-            cantidad: cantidadLote,
-          },
-          { where: { id: idLote } }
+          { cantidad: cantidadLote },
+          { where: { id: idLote },
+          transaction: t },
         );
       });
+      await t.commit();
       return "se realizo el movimiento de forma correcta";
     } catch (error) {
       await t.rollback();

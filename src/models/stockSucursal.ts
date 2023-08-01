@@ -10,7 +10,7 @@ import {
 import Sucursales from "./sucursales";
 import Productos from "./productos";
 
-@Table({ tableName: "sucursales", timestamps: false })
+@Table({ tableName: "stockSucursal", timestamps: false })
 export class StockSucursal extends Model<StockSucursal> {
   @PrimaryKey
   @Column({
@@ -39,9 +39,9 @@ export class StockSucursal extends Model<StockSucursal> {
   @ForeignKey(() => Productos)
   @Column({
     field: "codProducto",
-    type: DataType.INTEGER,
+    type: DataType.STRING,
   })
-  codProducto!: number;
+  codProducto!: string;
 
   @BelongsTo(() => Productos)
   producto!: Productos;

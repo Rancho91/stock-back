@@ -10,6 +10,7 @@ import {
 
 import { Productos } from "./productos";
 import { SalidasProductos } from "./salidasProductos";
+import {Combos} from "./combos";
 
 @Table({ tableName: "detalleSaliodaProducto", timestamps: false })
 export class DetalleSalidaProducto extends Model<DetalleSalidaProducto> {
@@ -44,6 +45,15 @@ export class DetalleSalidaProducto extends Model<DetalleSalidaProducto> {
   idSalidaProducto!: number;
   @BelongsTo(() => SalidasProductos)
   salidasProductos!: SalidasProductos;
+
+  @ForeignKey(() => Combos)
+  @Column({
+    field: "idCombo",
+    type: DataType.STRING,
+  })
+  idCombo!: string;
+  @BelongsTo(() => Combos)
+  combos!: Combos;
 }
 
 export default DetalleSalidaProducto;

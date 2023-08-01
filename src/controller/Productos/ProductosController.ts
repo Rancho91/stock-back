@@ -31,7 +31,7 @@ export class ProductosControllers {
       include: [
         {
           model: sequelize.models.Codigos,
-          as: "codigos", // Nombre de la relación en el modelo Productos
+          as: "codigos", 
         },
       ],
     });

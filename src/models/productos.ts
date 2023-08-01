@@ -5,10 +5,13 @@ import {
   DataType,
   PrimaryKey,
   HasMany,
+  ForeignKey,
+  BelongsTo
 } from "sequelize-typescript";
 import { Lotes } from "./lotes";
 import { DetalleSalidaProducto } from "./detalleSalidaProductos";
 import { Codigos } from "./codigos";
+import {UnidadMedida} from "./unidadMedida";
 @Table({ tableName: "productos", timestamps: false })
 export class Productos extends Model<Productos> {
   @PrimaryKey
@@ -31,6 +34,15 @@ export class Productos extends Model<Productos> {
   })
   delete!: boolean;
   
+  @ForeignKey(() => UnidadMedida)
+  @Column({
+    field: "idUnidadMedida",
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  idUnidadMedida!: number;
+  @BelongsTo(() => UnidadMedida)
+  unidadMedida!: UnidadMedida;
 
   @HasMany(() => Lotes)
   lotes?: Lotes[];
