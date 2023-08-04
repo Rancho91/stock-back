@@ -32,7 +32,7 @@ export class CombosProductos extends Model<CombosProductos> {
     field: "cantidad",
     type: DataType.INTEGER,
   })
-  cantiudad!: number;
+  cantidad!: number;
   
   @ForeignKey(() => Combos)
   @Column({

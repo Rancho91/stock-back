@@ -11,6 +11,7 @@ import {
 import { DetalleSalidaProducto } from "./detalleSalidaProductos";
 import { Sucursales } from "./sucursales";
 enum TipoSalidaEnum {
+  Venta = "venta",
   Sucursal = "Traspaso",
   Accidentes = "Rotura",
   Vencimiento = "Vencimiento",
@@ -27,13 +28,13 @@ export class SalidasProductos extends Model<SalidasProductos> {
   id!: number;
 
   @Column({
-    field: "fecha_salida",
+    field: "fechaSalida",
     type: DataType.DATE,
   })
   fechaSalida!: Date;
 
   @Column({
-    field: "tipo_salida",
+    field: "tipoSalida",
     type: DataType.ENUM(...Object.values(TipoSalidaEnum)),
   })
   tipoSalida!: TipoSalidaEnum;

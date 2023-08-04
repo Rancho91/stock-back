@@ -43,6 +43,7 @@ export class StockSucursal extends Model<StockSucursal> {
   })
   codProducto!: string;
 
+  
   @BelongsTo(() => Productos)
   producto!: Productos;
 
