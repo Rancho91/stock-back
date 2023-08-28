@@ -1,5 +1,7 @@
 import app from "./app";
 import { sequelize } from "./db";
+import * as dotenv from "dotenv";
+dotenv.config();
 const { PORT } = process.env;
 
 app.listen(PORT || 3001, async () => {

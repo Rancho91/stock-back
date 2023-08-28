@@ -5,7 +5,10 @@ require("dotenv").config();
 import { router } from "./routes";
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    exposedHeaders: 'auth-token',
+  };
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/", router);
