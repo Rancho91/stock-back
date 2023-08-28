@@ -103,4 +103,38 @@ export class consultaController {
     }
     return cantidadCondition;
   }
+
+  public async homeInformatio(){
+
+    const cantProducto = await sequelize.models.Productos.findAll({
+      attributes:[[sequelize.fn('COUNT', sequelize.col('id')), 'cantidad'], ]
+    })
+    const maxDateIngreso=sequelize.models.MovimientoLotes.findAll({
+      attributes:[[sequelize.fn('MAX',sequelize.col('fechaMovimiento')),'ultimoTraspaso']], 
+      where:[
+        {
+          tipoSalida: "sucursal"
+        },{
+          entradaSalida:"false"
+        }
+      ]
+
+    })
+
+    const maxDateTraspaso=sequelize.models.SalidasProductos.findAll({
+      attributes:[[sequelize.fn('MAX',sequelize.col('fechaMovimiento')),'ultimoTraspaso']], 
+      where:[
+        {
+          tipoSalida: "traspaso"
+        },{
+          entradaSalida:"false"
+        }
+      ]
+
+    })
+
+
+
+    return {cantProducto, maxDateIngreso, maxDateTraspaso}
+  }
 }

@@ -41,6 +41,7 @@ export class MovimientoLotes extends Model<MovimientoLotes> {
   @Column({
     field: "entradaSalida",
     type: DataType.BOOLEAN,
+    //true:entrada, False:salida
   })
   entradaSalida!: boolean;
 
