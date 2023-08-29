@@ -10,13 +10,7 @@ import {
 } from "sequelize-typescript";
 import { Lotes } from "./lotes";
 import { DetalleMovimiento } from "./detalleMovimiento";
-
-enum TipoSalidaEnum {
-  Sucursal = "Sucursal",
-  Accidentes = "Accidentes",
-  Vencimiento = "Vencimiento",
-  Otros = "Otros",
-}
+import {TipoSalida} from "./tipoSalidas"
 
 @Table({ tableName: "movimientos", timestamps: false })
 export class MovimientoLotes extends Model<MovimientoLotes> {
@@ -52,14 +46,21 @@ export class MovimientoLotes extends Model<MovimientoLotes> {
   })
   fechaMovimiento!: Date;
 
+
+
+  @ForeignKey(() => TipoSalida)
   @Column({
     field: "tipoSalida",
-    type: DataType.ENUM(...Object.values(TipoSalidaEnum)),
+    type: DataType.INTEGER,
   })
-  tipoSalida!: TipoSalidaEnum;
+  tipoSalida!: number;
+
+  @BelongsTo(() => TipoSalida)
+  TipoSalida!: TipoSalida;
 
   @HasMany(() => DetalleMovimiento)
   detalleMovimiento?: DetalleMovimiento[];
+  
 }
 
 export default MovimientoLotes;

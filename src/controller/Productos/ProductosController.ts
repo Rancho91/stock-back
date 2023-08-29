@@ -73,6 +73,7 @@ export class ProductosControllers {
       }
     );
   }
+  
   public async deleteProducto(id: number) {
     return await sequelize.models.Codigos.update(
       {

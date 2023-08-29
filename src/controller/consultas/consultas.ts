@@ -2,30 +2,29 @@ import { sequelize } from "../../db";
 import Lotes from "../../models/lotes";
 import Productos from "../../models/productos";
 import { Op } from "sequelize";
-
 export class consultaController {
   public stockConsulta({
     id,
     description,
-    cantidad,
-    mayor,
+    // cantidad,
+    // mayor,
   }: {
     id: number;
     description: string;
-    cantidad: number;
-    mayor: boolean;
+    // cantidad: number;
+    // mayor: boolean;
   }) {
-    const cantidadCondition = this.whereCantidad(cantidad, mayor);
+    // const cantidadCondition = this.whereCantidad(cantidad, mayor);
 
     const sucrusalStock = sequelize.models.StockSucursal.findAll({
       where: {
         idSucursal: id,
-        cantidad: cantidadCondition,
+        cantidad: 1,
       },
       include: [
         {
-          model: Productos,
-          attributes: ["id", "description"],
+          model: sequelize.models.Productos,
+          attributes: ["codigoInterno", "description"],
           where: {
             description: {
               [Op.like]: `%${description}%`,
@@ -45,17 +44,17 @@ export class consultaController {
     mayorCantidad,
     mayorStock,
   }: // fechaVencimiento,
-  // fechaIngreso
-  {
-    id: number;
-    description: string;
-    cantidad: number;
-    stock: number;
-    mayorCantidad: boolean;
-    mayorStock: boolean;
-    // fechaVencimiento: Date;
-    // fechaIngreso:Date;
-  }) {
+    // fechaIngreso
+    {
+      id: number;
+      description: string;
+      cantidad: number;
+      stock: number;
+      mayorCantidad: boolean;
+      mayorStock: boolean;
+      // fechaVencimiento: Date;
+      // fechaIngreso:Date;
+    }) {
     const cantidadCondition = this.whereCantidad(cantidad, mayorCantidad);
     const cantidadStock = this.whereCantidad(stock, mayorStock);
 
@@ -104,37 +103,46 @@ export class consultaController {
     return cantidadCondition;
   }
 
-  public async homeInformatio(){
+  public async homeInformatio() {
 
     const cantProducto = await sequelize.models.Productos.findAll({
-      attributes:[[sequelize.fn('COUNT', sequelize.col('id')), 'cantidad'], ]
-    })
-    const maxDateIngreso=sequelize.models.MovimientoLotes.findAll({
-      attributes:[[sequelize.fn('MAX',sequelize.col('fechaMovimiento')),'ultimoTraspaso']], 
-      where:[
-        {
-          tipoSalida: "sucursal"
-        },{
-          entradaSalida:"false"
-        }
-      ]
-
+      attributes: [[sequelize.fn('COUNT', sequelize.col('codigoInterno')), 'cantidad'],]
     })
 
-    const maxDateTraspaso=sequelize.models.SalidasProductos.findAll({
-      attributes:[[sequelize.fn('MAX',sequelize.col('fechaMovimiento')),'ultimoTraspaso']], 
-      where:[
-        {
-          tipoSalida: "traspaso"
-        },{
-          entradaSalida:"false"
-        }
-      ]
+    const maxDateIngreso = await sequelize.models.MovimientoLotes.findAll({
+      attributes: [[sequelize.fn('MAX', sequelize.col('fechaMovimiento')), 'ingreso'],'tipoSalida',],
+      include: [
+                {
+                  model: sequelize.models.TipoSalida,
+                  where: {
+                    tipo: "sucursal"
+                  },
+                  attributes: []
+                  
+                },
+
+              ],
+              group: ['tipoSalida'], // Agrupar por tipoSalida
 
     })
 
+    const maxDateTraspaso = await sequelize.models.SalidasProductos.findAll({
+      attributes: [[sequelize.fn('MAX', sequelize.col('fechaSalida')), 'UltimoTraspaso'], 'idTipoSalida'],
+      include: [
+        
+          {
+            model: sequelize.models.TipoSalida,
+            where: {
+              tipo: "traspaso"
+            },
+            attributes: []
+            
+          }
 
-
-    return {cantProducto, maxDateIngreso, maxDateTraspaso}
+      ],
+      group: ['idTipoSalida'],   
+     })
+  
+    return { cantProducto, maxDateIngreso, maxDateTraspaso }
   }
 }

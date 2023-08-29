@@ -19,8 +19,6 @@ export class Sucursales extends Model<Sucursales> {
   })
   id!: number;
 
-  //relacion con la tabla Deposito
-
   @Column({
     field: "direccion",
     type: DataType.STRING,

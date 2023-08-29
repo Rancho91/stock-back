@@ -21,12 +21,14 @@ router.get("/deposito", (_req: Request, res: Response) => {
   }
 });
 
-router.get('/home',(_req: Request, res: Response) =>{
+router.get('/home',async (_req: Request, res: Response) =>{
   try {
-    const response = controller.homeInformatio()
+    const response = await controller.homeInformatio()
+    console.log(response)
     res.status(200).json(response)
   } catch (error) {
-    res.status(400).json("Error")
+    res.status(400).json(error)
   }
 } )
+
 export { router };

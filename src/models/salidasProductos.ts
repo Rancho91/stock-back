@@ -10,13 +10,8 @@ import {
 } from "sequelize-typescript";
 import { DetalleSalidaProducto } from "./detalleSalidaProductos";
 import { Sucursales } from "./sucursales";
-enum TipoSalidaEnum {
-  Venta = "venta",
-  Sucursal = "Traspaso",
-  Accidentes = "Rotura",
-  Vencimiento = "Vencimiento",
-  Otros = "Otros",
-}
+import TipoSalida from "./tipoSalidas";
+
 @Table({ tableName: "salidas_productos", timestamps: false })
 export class SalidasProductos extends Model<SalidasProductos> {
   @PrimaryKey
@@ -33,11 +28,14 @@ export class SalidasProductos extends Model<SalidasProductos> {
   })
   fechaSalida!: Date;
 
+
+  @ForeignKey(() => TipoSalida)
   @Column({
-    field: "tipoSalida",
-    type: DataType.ENUM(...Object.values(TipoSalidaEnum)),
+    field: "idTipoSalida",
+    type: DataType.INTEGER,
   })
-  tipoSalida!: TipoSalidaEnum;
+  idTipoSalida!: number;
+
 
   @ForeignKey(() => Sucursales)
   @Column({
@@ -48,6 +46,9 @@ export class SalidasProductos extends Model<SalidasProductos> {
 
   @BelongsTo(() => Sucursales)
   sucursales!: Sucursales;
+  
+  @BelongsTo(() => TipoSalida)
+  tipoSalida!: TipoSalida;
 
   @HasMany(() => DetalleSalidaProducto)
   detalleSalidaProducto!: DetalleSalidaProducto[];
