@@ -3,8 +3,9 @@ import {
   Column,
   Table,
   DataType,
-  BelongsTo,
+  
   PrimaryKey,
+  HasMany,
 } from "sequelize-typescript";
 
 import { Productos } from "./productos";
@@ -22,10 +23,11 @@ export class UnidadMedida extends Model<UnidadMedida> {
   @Column({
     field: "description",
     type: DataType.STRING,
+   
   })
   description!: string;
 
-  @BelongsTo(() => Productos, { foreignKey: "codigoInterno" })
+  @HasMany(() => Productos)
   productos?: Productos;
 }
 

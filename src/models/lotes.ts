@@ -37,16 +37,16 @@ export class Lotes extends Model<Lotes> {
     field: "fechaIngreso",
     type: DataType.DATE,
   })
-  fechaIngreso!: string;
+  fechaIngreso!: Date;
 
   @Column({
     field: "fechaVencimiento",
     type: DataType.DATE,
   })
-  fechaVencimiento!: string;
+  fechaVencimiento!: Date;
   @Column({
     field: "cantidad",
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL,
   })
   cantidad!: number;
   @Column({
@@ -57,11 +57,11 @@ export class Lotes extends Model<Lotes> {
 
   @ForeignKey(() => Productos)
   @Column({
-    field: "codProducto",
+    field: "codigoInterno",
     type: DataType.STRING,
   })
-  codProducto!: string;
-  @BelongsTo(() => Productos)
+  codigoInterno!: string;
+  @BelongsTo(() => Productos, { foreignKey: "codigoInterno" })
   producto!: Productos;
 
 

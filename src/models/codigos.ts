@@ -16,6 +16,7 @@ export class Codigos extends Model<Codigos> {
   @Column({
     field: "codigoExterno",
     type: DataType.STRING,
+    unique:true,
   })
   codigoExterno!: string;
 

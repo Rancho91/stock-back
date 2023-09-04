@@ -33,8 +33,10 @@ import {
     @Column({
       field: "email",
       type: DataType.STRING,
+      unique: true,
     })
     email!: string;
+    
     @Column({
       field: "delete",
       type: DataType.BOOLEAN,

@@ -108,41 +108,49 @@ export class consultaController {
     const cantProducto = await sequelize.models.Productos.findAll({
       attributes: [[sequelize.fn('COUNT', sequelize.col('codigoInterno')), 'cantidad'],]
     })
+    const cantProductoDisponiblesDeposito = await sequelize.models.Lotes.findAll({
+      attributes: [[sequelize.fn('COUNT', sequelize.col('codigoInterno')), 'cantidad'],],
+      where: {
+        cantidad: 15,
+        fechaVencimiento: { [Op.gt]: new Date() }
+
+      },
+
+
+    })
 
     const maxDateIngreso = await sequelize.models.MovimientoLotes.findAll({
-      attributes: [[sequelize.fn('MAX', sequelize.col('fechaMovimiento')), 'ingreso'],'tipoSalida',],
+      attributes: [[sequelize.fn('MAX', sequelize.col('fechaMovimiento')), 'ingreso'], 'tipoSalida',],
       include: [
-                {
-                  model: sequelize.models.TipoSalida,
-                  where: {
-                    tipo: "sucursal"
-                  },
-                  attributes: []
-                  
-                },
-
-              ],
-              group: ['tipoSalida'], // Agrupar por tipoSalida
+        {
+          model: sequelize.models.TipoSalida,
+          where: {
+            tipo: "sucursal"
+          },
+          attributes: []
+        },
+      ],
+      group: ['tipoSalida'],
 
     })
 
     const maxDateTraspaso = await sequelize.models.SalidasProductos.findAll({
       attributes: [[sequelize.fn('MAX', sequelize.col('fechaSalida')), 'UltimoTraspaso'], 'idTipoSalida'],
       include: [
-        
-          {
-            model: sequelize.models.TipoSalida,
-            where: {
-              tipo: "traspaso"
-            },
-            attributes: []
-            
-          }
+
+        {
+          model: sequelize.models.TipoSalida,
+          where: {
+            tipo: "traspaso"
+          },
+          attributes: []
+
+        }
 
       ],
-      group: ['idTipoSalida'],   
-     })
-  
-    return { cantProducto, maxDateIngreso, maxDateTraspaso }
+      group: ['idTipoSalida'],
+    })
+
+    return { cantProducto, maxDateIngreso, maxDateTraspaso, cantProductoDisponiblesDeposito }
   }
 }

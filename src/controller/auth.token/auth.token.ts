@@ -1,5 +1,4 @@
 import { sequelize } from "../../db";
-// import bcrypt from "bcryptjs";
 export class UserControllers {
   public async postUser({
     username,
@@ -10,6 +9,11 @@ export class UserControllers {
     password: string;
     email: string;
   }) {
+    const findEmail = await sequelize.models.Users.findOne({where:{
+      email:email
+    }})
+    if(!findEmail) throw new Error("este email ya ha sido registrado")
+    
     const user = await sequelize.models.Users.create({
       username,
       email,
