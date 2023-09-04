@@ -29,6 +29,7 @@ export class Codigos extends Model<Codigos> {
   
   @BelongsTo(() => Productos, { foreignKey: "codigoInterno" })
   productos?: Productos;
+  
 }
 
 export default Codigos;

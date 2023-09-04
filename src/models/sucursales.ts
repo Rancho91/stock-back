@@ -31,6 +31,12 @@ export class Sucursales extends Model<Sucursales> {
     type: DataType.STRING,
   })
   telefono!: string;
+  
+  @Column({
+    field: "email",
+    type: DataType.STRING,
+  })
+  email!: string;
 
   @Column({
     field: "descripcion",

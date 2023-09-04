@@ -17,10 +17,10 @@ import {
     codigoInterno!: string;
   
     @Column({
-      field: "description",
+      field: "descripcion",
       type: DataType.STRING,
     })
-    description!: string;
+    descripcion!: string;
   
     @Column({
       field: "delete",

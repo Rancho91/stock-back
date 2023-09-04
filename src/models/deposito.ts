@@ -23,11 +23,22 @@ export class Deposito extends Model<Deposito> {
   id!: number;
 
   @Column({
-    field: "description",
+    field: "descripcion",
     type: DataType.STRING,
     allowNull: true, // La columna price puede contener valores nulos
   })
-  description?: string;
+  descripcion?: string;
+  @Column({
+    field: "telefono",
+    type: DataType.STRING,
+  })
+  telefono!: string;
+  
+  @Column({
+    field: "email",
+    type: DataType.STRING,
+  })
+  email!: string;
   @Column({
     field: "delete",
     type: DataType.BOOLEAN,
